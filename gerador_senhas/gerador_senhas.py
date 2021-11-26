@@ -22,7 +22,7 @@ def main():
     while True:
         try:  #  Validando se a entrada é um número
             tamanho = int(input('Digite a quantidade de dígitos de sua senha (Mínimo de 8 caracteres): '))
-            if tamanho < 8:
+            if tamanho < 8:  #  Validando se o tamanho é maior que 8 caracteres
                 raise SizeError('Tamanho menor que 8 caracteres')
         except ValueError as erro:
             print(f'Por favor, digite um número. Erro: {erro}')
