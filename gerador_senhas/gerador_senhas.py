@@ -16,7 +16,7 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
     diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
     arquivo = open(join(diretorio, 'senhas.txt'), 'a')
-    arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n') # Criptografando a senha em hash com algoritmo sha1
+    arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
 
 
 def main():
