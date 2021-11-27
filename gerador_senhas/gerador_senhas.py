@@ -1,6 +1,7 @@
 from random import SystemRandom
 from string import ascii_letters, digits
 from os.path import join
+import datetime
 import hashlib
 
 
@@ -43,9 +44,12 @@ def main():
         except SizeError as erro:
             print(erro)
         else:
+            inicio = datetime.datetime.now()
             print('Senha gerada: ', end='')
             senha = ''.join(rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
             print(senha)
+            duracao = datetime.datetime.now() - inicio
+            print(f'Senha gerada em: {duracao}')
             resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
             while resposta_gravacao not in 'SN':
                 resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
