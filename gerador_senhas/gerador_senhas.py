@@ -14,9 +14,15 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 
 
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
+    criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
     diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
     arquivo = open(join(diretorio, 'senhas.txt'), 'a')
-    arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
+    while criptografia_resposta not in 'SN':
+        criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
+    if criptografia_resposta == 'S':
+        arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
+    else:
+        arquivo.write(f'{senha}\n')  # Salvando senha sem criptografia
 
 
 def main():
@@ -38,13 +44,12 @@ def main():
             print(erro)
         else:
             print('Senha gerada: ', end='')
-            senha = ''.join(
-                rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
+            senha = ''.join(rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
             print(senha)
             resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
             while resposta_gravacao not in 'SN':
                 resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
-            if resposta_gravacao == 'S':  # Gravação do hash da senha em arquivo
+            if resposta_gravacao == 'S':  # Gravação da senha em arquivo
                 salva_senha(senha)
             resposta = input('Quer gerar mais uma senha? [S/N] ').strip().upper()[0]
             while resposta not in 'SN':
