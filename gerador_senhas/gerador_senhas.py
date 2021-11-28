@@ -26,9 +26,10 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
         escolha = int(input('Sua escolha: '))
         if 0 < escolha < 5:
             break
-    diretorio = f'C:\\Users\\{os.getlogin()}\\Desktop' if escolha == 1 else f'C:\\Users\\{os.getlogin()}\\Downloads' if escolha == 2 else f'C:\\Users\\{os.getlogin()}\\Documents'
+    diretorio = f'C:\\Users\\{os.getlogin()}\\Desktop' if escolha == 1 else f'C:\\Users\\{os.getlogin()}\\Downloads' \
+        if escolha == 2 else f'C:\\Users\\{os.getlogin()}\\Documents'  # Selecionando o diretório do arquivo
     while True:
-        try:  #  Validando o diretório inserido pelo usuário
+        try:  # Validando o diretório inserido pelo usuário
             if escolha == 4:
                 diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
             arquivo = open(join(diretorio, 'senhas.txt'), 'a')
@@ -39,7 +40,8 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
     while criptografia_resposta not in 'SN':
         criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
     if criptografia_resposta == 'S':
-        arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
+        arquivo.write(
+            f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
     else:
         arquivo.write(f'{senha}\n')  # Salvando senha sem criptografia
 
@@ -64,7 +66,8 @@ def main():
         else:
             inicio = datetime.now()
             print('Senha gerada: ', end='')
-            senha = ''.join(rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
+            senha = ''.join(
+                rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
             print(senha)
             print(f'Senha gerada em: {datetime.now() - inicio}')
             resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
