@@ -1,3 +1,4 @@
+import os.path
 from random import SystemRandom
 from string import ascii_letters, digits
 from os.path import join
@@ -16,9 +17,20 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
     criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
+    print("""Escolha um local para salvar o arquivo: 
+            1- Área de Trabalho
+            2- Downloads
+            3- Documentos
+            4- Digitar manualmente""")
+    while True:
+        escolha = int(input('Sua escolha: '))
+        if 0 < escolha < 5:
+            break
+    diretorio = f'C:\\Users\\{os.getlogin()}\\Desktop' if escolha == 1 else f'C:\\Users\\{os.getlogin()}\\Downloads' if escolha == 2 else f'C:\\Users\\{os.getlogin()}\\Documents'
     while True:
         try:  #  Validando o diretório inserido pelo usuário
-            diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
+            if escolha == 4:
+                diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
             arquivo = open(join(diretorio, 'senhas.txt'), 'a')
         except FileNotFoundError:
             print('Diretório inválido')
@@ -44,9 +56,9 @@ def main():
         try:  # Validando se a entrada é um número
             tamanho = int(input('Digite a quantidade de dígitos de sua senha (Mínimo de 8 caracteres): '))
             if tamanho < 8:  # Validando se o tamanho é maior que 8 caracteres
-                raise SizeError('Tamanho menor que 8 caracteres')
+                raise SizeError('Tamanho menor que 8 caracteres.')
         except ValueError as erro:
-            print(f'Por favor, digite um número. Erro: {erro}')
+            print(f'Por favor, digite um número.')
         except SizeError as erro:
             print(erro)
         else:
