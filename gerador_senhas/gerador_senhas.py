@@ -39,11 +39,9 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
             break
     while criptografia_resposta not in 'SN':
         criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
-    if criptografia_resposta == 'S':
-        arquivo.write(
-            f'{hashlib.sha1(senha.encode()).hexdigest()}\n')  # Criptografando a senha em hash com algoritmo sha1
-    else:
-        arquivo.write(f'{senha}\n')  # Salvando senha sem criptografia
+
+    arquivo.write(f'{hashlib.sha1(senha.encode()).hexdigest()}\n' if criptografia_resposta == 'S'  # Criptografando a senha em hash com algoritmo sha1
+                  else f'{senha}\n')  # Salvando senha sem criptografia
 
 
 def main():
