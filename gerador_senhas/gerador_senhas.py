@@ -1,9 +1,8 @@
 import os.path
+import hashlib
 from random import SystemRandom
 from string import ascii_letters, digits
-from os.path import join
 from datetime import datetime
-import hashlib
 
 
 class Error(Exception):
@@ -37,7 +36,7 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
         try:  # Validando o diretório inserido pelo usuário
             if escolha == 4:
                 diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
-            arquivo = open(join(diretorio, f'{nome_arquivo}.txt'), 'a')
+            arquivo = open(os.path.join(diretorio, f'{nome_arquivo}.txt'), 'a')
         except FileNotFoundError:
             print('Diretório inválido')
         else:
@@ -75,7 +74,7 @@ def main():
             inicio = datetime.now()
             print('Senha gerada: ', end='')
             senha = ''.join(
-                rnd.choice(chars) for i in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
+                rnd.choice(chars) for _ in range(tamanho))  # Geração da senha aleatória com os caracteres registrados
             print(senha)
             print(f'Senha gerada em: {datetime.now() - inicio}')
             resposta_gravacao = input('Deseja gravar essa senha em um arquivo? [S/N] ').strip().upper()[0]
