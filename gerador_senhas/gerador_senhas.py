@@ -18,6 +18,7 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
     criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
     nome_arquivo = input('Digite o nome do arquivo a ser gerado: ').strip()
     site = input('Essa senha é para o cadastro de qual site? (Pressione enter caso não queira compartilhar): ').strip()
+    
     print("""Escolha um local para salvar o arquivo: 
             1- Área de Trabalho
             2- Downloads
