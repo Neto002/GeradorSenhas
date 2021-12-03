@@ -17,7 +17,7 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
     criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
-    site = input('Essa senha é para o cadastro de qual site? (Deixe em branco caso não deseje compartilhar): ')
+    site = input('Essa senha é para o cadastro de qual site? (Pressione enter caso não queira compartilhar): ')
     print("""Escolha um local para salvar o arquivo: 
             1- Área de Trabalho
             2- Downloads
@@ -53,7 +53,8 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
 
 
 def main():
-    chars = ascii_letters + digits + 'çÇ!@#$%&*()-_++§"´`[]{}ªº~^,.<>;:/?°\\|'  # Registrando os caracteres desejados para a senha
+    # Registrando os caracteres desejados para a senha
+    chars = ascii_letters + digits + 'çÇ!@#$%&*()-_++§"´`[]{}ªº~^,.<>;:/?°\\|'
     rnd = SystemRandom()
 
     print('-' * 60)
