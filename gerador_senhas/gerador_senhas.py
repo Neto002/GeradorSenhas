@@ -17,17 +17,21 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
     criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
+    site = input('Essa senha é para o cadastro de qual site? (Deixe em branco caso não deseje compartilhar): ')
     print("""Escolha um local para salvar o arquivo: 
             1- Área de Trabalho
             2- Downloads
             3- Documentos
             4- Digitar manualmente""")
+
     while True:
         escolha = int(input('Sua escolha: '))
         if 0 < escolha < 5:
             break
+
     diretorio = f'C:\\Users\\{os.getlogin()}\\Desktop' if escolha == 1 else f'C:\\Users\\{os.getlogin()}\\Downloads' \
         if escolha == 2 else f'C:\\Users\\{os.getlogin()}\\Documents'  # Selecionando o diretório do arquivo
+
     while True:
         try:  # Validando o diretório inserido pelo usuário
             if escolha == 4:
@@ -37,11 +41,18 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
             print('Diretório inválido')
         else:
             break
+
     while criptografia_resposta not in 'SN':
         criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
 
-    arquivo.write(f'{hashlib.sha1(senha.encode("utf-8")).hexdigest()}\n' if criptografia_resposta == 'S'  # Criptografando a senha em hash com algoritmo sha1
-                  else f'{senha}\n')  # Salvando senha sem criptografia
+    if criptografia_resposta == 'S':  # Criptografando a senha em hash com algoritmo sha1
+        arquivo.write(f'{hashlib.sha1(senha.encode("utf-8")).hexdigest()} - {site}\n' if site != '' else
+                      f'{hashlib.sha1(senha.encode("utf-8")).hexdigest()}')
+    else:
+        arquivo.write(f'{senha} - {site}\n' if site != '' else f'{senha}')  # Salvando senha sem criptografia
+
+    '''arquivo.write(f'{hashlib.sha1(senha.encode("utf-8")).hexdigest()} - {site}\n' if criptografia_resposta == 'S'  # Criptografando a senha em hash com algoritmo sha1
+                  else f'{senha} - {site}\n')  # Salvando senha sem criptografia'''
 
 
 def main():
