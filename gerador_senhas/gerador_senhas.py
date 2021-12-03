@@ -67,7 +67,7 @@ def main():
             tamanho = int(input('Digite a quantidade de dígitos de sua senha (Mínimo de 8 caracteres): '))
             if tamanho < 8:  # Validando se o tamanho é maior que 8 caracteres
                 raise SizeError('Tamanho menor que 8 caracteres.')
-        except ValueError as erro:
+        except ValueError:
             print(f'Por favor, digite um número.')
         except SizeError as erro:
             print(erro)
