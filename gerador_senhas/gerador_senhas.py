@@ -51,9 +51,6 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
     else:
         arquivo.write(f'{senha} - {site}\n' if site != '' else f'{senha}')  # Salvando senha sem criptografia
 
-    '''arquivo.write(f'{hashlib.sha1(senha.encode("utf-8")).hexdigest()} - {site}\n' if criptografia_resposta == 'S'  # Criptografando a senha em hash com algoritmo sha1
-                  else f'{senha} - {site}\n')  # Salvando senha sem criptografia'''
-
 
 def main():
     chars = ascii_letters + digits + 'çÇ!@#$%&*()-_++§"´`[]{}ªº~^,.<>;:/?°\\|'  # Registrando os caracteres desejados para a senha
