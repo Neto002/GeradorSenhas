@@ -17,7 +17,8 @@ class SizeError(Error):  # Criação de Erro para o tamanho da senha
 
 def salva_senha(senha):  # Método de gravação de hash da senha em diretório escolhido pelo usuário
     criptografia_resposta = input('Deseja criptografar a senha em hash? [S/N] ').strip().upper()[0]
-    site = input('Essa senha é para o cadastro de qual site? (Pressione enter caso não queira compartilhar): ')
+    nome_arquivo = input('Digite o nome do arquivo a ser gerado: ').strip()
+    site = input('Essa senha é para o cadastro de qual site? (Pressione enter caso não queira compartilhar): ').strip()
     print("""Escolha um local para salvar o arquivo: 
             1- Área de Trabalho
             2- Downloads
@@ -36,7 +37,7 @@ def salva_senha(senha):  # Método de gravação de hash da senha em diretório 
         try:  # Validando o diretório inserido pelo usuário
             if escolha == 4:
                 diretorio = input('Digite o diretório desejado para o arquivo: ').strip()
-            arquivo = open(join(diretorio, 'senhas.txt'), 'a')
+            arquivo = open(join(diretorio, f'{nome_arquivo}.txt'), 'a')
         except FileNotFoundError:
             print('Diretório inválido')
         else:
